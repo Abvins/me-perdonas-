@@ -1,73 +1,263 @@
-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale 1.0">
+
+    <title>Gojomiamor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --background-color: #000;
+            --text-color: #f8f9fa;
+            --header-background: #333;
+            --nav-background: #222;
+            --footer-background: #222;
+            --highlight-color: #ff4081;
+            --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;  }
+
+        header {
+            background-color: var(--header-background);
+            color: var(--text-color);
+            text-align: center;
+            padding: 1em 0;
+            width: calc(100% - 120px); /* Ajustado al nuevo ancho del panel izquierdo */
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            left: 120px; /* Ajustado al nuevo ancho del panel izquierdo */
+            top: 0;
+            transition: background-color 0.3s ease;
+            animation: slideIn 1s ease-in-out;  }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1;  }}
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;  }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--nav-background);
+            padding: 1em;
+            width: 120px; /* Ancho ajustado */
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            height: 100vh;
+            top: 0;
+            left: 0; /* Ajustado para alinear el panel a la izquierda */
+            transition: transform 0.3s ease;
+            animation: slideRight 1s ease-in-out;  }
+
+        @keyframes slideRight {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1;  }}
+
+        nav:hover {
+            transform: translateX(10px);  }
+        nav .sidebar-header {
+            /* Sin animación */
+        }
+        nav .sidebar-header img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        nav .sidebar-header img:hover {
+            transform: scale(1.1);
+        }
+        nav .sidebar-header h2,
+        nav .sidebar-header p {
+            margin: 0.5em 0;
+            /* Sin animación */
+        }
+        nav .sidebar-header h2 {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        nav .sidebar-header p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        nav a {
+            color: var(--text-color);
+            margin: 0.5em 0;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--highlight-color);
+            text-shadow: 0 0 5px var(--highlight-color);
+        }
+        .main-content {
+            margin-left: 120px; /* Ajustado al nuevo ancho del panel izquierdo */
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-height: calc(100vh - 3em);
+        }
+        .blog-entry {
+            text-align: center;
+            margin-top: 4em;
+            margin-bottom: 2em;
+            padding: 1em;
+            background-color: var(--header-background);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: var(--box-shadow);
+            animation: slideIn 1s ease-in-out;
+        }
+        .blog-entry h2 {
+            margin: 0.5em 0;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .blog-entry p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        .left-sidebar {
+            background-color: var(--nav-background);
+            padding: 1em;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 1.5em;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: slideIn 1s ease-in-out;
+        }
+        .left-sidebar h2 {
+            margin-top: 0;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .left-sidebar .section {
+            margin-bottom: 1.5em;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            animation: slideIn 1s ease-in-out;
+        }
+        .left-sidebar .section img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .left-sidebar .section img:hover {
+            transform: scale(1.1);
+        }
+        .left-sidebar .section p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        footer {
+            background-color: var(--footer-background);
+            color: var(--text-color);
+            text-align: center;
+            padding: 0.5em 0;
+            margin-top: auto;
+            width: calc(100% - 120px); /* Alineación con el header */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            left: 120px;
+            bottom: 0;
+            animation: slideUp 1s ease-in-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        footer p {
+            font-size: 0.8em;
+            margin: 0;
+            animation: slideUp 1s ease-in-out;
+        }
+        @media (max-width: 768px) {
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                transform: none;
+            }
+            header {
+                width: 100%;
+                left: 0;
+            }
+            footer {
+                width: 100%;
+                left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
 
 
-h1 {
-    padding: 10px;
-    color: #711DB0;
-}
 
-
-
-button {
-    color: brown;
-    width: 80px;
-    height: 40px;
-    border: 3px solid #711DB0;
-    border-radius: 10px;
-    background-color: transparent;
-    font-size: xx-large;
-    
-}
-
-#Si {
-    grid-row:  5;
-    grid-column: 5;
-}
-
-#No {
-    grid-row: 5;
-    grid-column: 6;
-    
-}
-
-section {
-    display: grid;
-    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    width: 1200px;
-    height: 600px;
-    align-items: center;
-    justify-items: center;
-}
-
-body {
-    max-width: 1200px;
-    max-height: 673px;
-    margin: 0 auto;
-    background-image: url(/foto/pngtree-landscapes-wallpaper-images-picture-image_3021437.jpg);
-    background-repeat: no-repeat; 
-    background-position: center center; 
-     background-size: cover;
-    
-}
-
-body {
-    max-width: 1200px;
-    max-height: 673px;
-    margin: 0 auto;
-    background-image: url(https://www.pinterest.com/pin/802063014921715461/feedback/?invite_code=370e3696ccd942bd862fe83b949347c3&sender_id=1029987514687097823);
-    background-repeat: no-repeat; 
-    background-position: center center, center center; /* La primera imagen está centrada vertical y horizontalmente, y lo mismo para la segunda imagen */
-    background-size: cover, auto; /* La primera imagen se ajusta al tamaño del cuerpo, mientras que la segunda se muestra a su tamaño original */
-}
-}
-
-p {
-    font-size: xx-large;
-    justify-content: center;
-    color: pink;
-}
+<body>
+    <header>
+        <h1>Satoru Gojo</h1>
+    </header>
+    <nav>
+        <div class="sidebar-header">
+            <img src="file:///C:/Users/adry2/Downloads/Jujutsu%20Kaisen%20Satoru.jpeg" alt="Jujutsu Kaisen Satoru">
+            <h2>titulo?</h2>
+            <p>nose.......</p>
+        </div>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+    </nav>
+    <div class="main-content">
+        <div class="blog-entry">
+            <h2>Blog</h2>
+            <p>Lo que piense?</p>
+        </div>
+        <div class="left-sidebar">
+            <div class="section">
+                <img src="file:///C:/Users/adry2/Downloads/Jujutsu%20Kaisen%20Satoru.jpeg" alt="Jujutsu Kaisen Satoru">
+                <h2>nose</h2>
+                <p>informacion?.</p>
+            </div>
+            <div class="section">
+                <img src="file:///C:/Users/adry2/Downloads/Jujutsu%20Kaisen%20Satoru.jpeg" alt="Jujutsu Kaisen Satoru">
+                <h2>nosex2</h2>
+                <p>infos</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 28/07/2024.</p>
+    </footer>
+</body>
+</html>
